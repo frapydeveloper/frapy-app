@@ -1,0 +1,11 @@
+@import "../../../../../core/style/colors.scss";
+
+.navbar-container {
+  .app-selector-wrapper {
+    border-right: 1px solid $ui-09;
+  }
+
+  .search-box-container {
+    margin: 0 16px;
+  }
+}

@@ -1,18 +1,18 @@
 import React from "react";
 
 import { Navigate, Outlet } from "react-router-dom";
-import Dashboard from "../../app/pages/Dashboard";
-import SignIn from "../../app/pages/SignIn";
+import Dashboard from "../../app/screens/Dashboard";
+import Home from "../../app/screens/Dashboard/pages/Home";
+import Team from "../../app/screens/Dashboard/pages/Team";
+import Project from "../../app/screens/Project";
+import SignIn from "../../app/screens/SignIn";
+import ModalManager from "../../app/screens/Dashboard/modalManager";
 
 export const routes = (isLoggedIn: boolean) => [
   {
     path: "/",
     element: isLoggedIn ? (
       <>
-        {/* NOTIFICATION MANAGER */}
-        {/* MODAL MANAGER */}
-        {/* NAVBAR */}
-        {/* <Navbar leftItems={<Logo />} /> */}
         <Outlet />
       </>
     ) : (
@@ -21,14 +21,29 @@ export const routes = (isLoggedIn: boolean) => [
     children: [
       {
         path: "",
-        element: <Dashboard />,
+        element: (
+          <>
+            <ModalManager />
+            <Dashboard />
+          </>
+        ),
         children: [
           {
             path: "",
             exact: true,
-            element: <div>Home</div>,
+            element: <Home />,
+          },
+          {
+            path: "team/:team",
+            exact: true,
+            element: <Team />,
           },
         ],
+      },
+      {
+        path: "team/:team/file/:file",
+        exact: true,
+        element: <Project />,
       },
     ],
   },

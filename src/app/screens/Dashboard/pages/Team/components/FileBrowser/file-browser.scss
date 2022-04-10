@@ -1,0 +1,33 @@
+@import "../../../../../../../core/style/colors.scss";
+
+.file-browser-container {
+  .header-wrapper {
+    width: 100%;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+
+    .team-details {
+      .team-info {
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+      }
+    }
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      column-gap: 16px;
+    }
+  }
+
+  .projects-wrapper {
+    &.grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      column-gap: 16px;
+      row-gap: 8px;
+      box-sizing: border-box;
+    }
+  }
+}

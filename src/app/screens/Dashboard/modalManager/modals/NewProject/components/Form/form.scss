@@ -1,0 +1,57 @@
+@import "../../../../../../../../core/style/colors.scss";
+
+.new-project-form-container {
+  .form-header {
+    margin-bottom: 32px;
+  }
+
+  .new-project-form-wrapper {
+    width: 800px;
+    border-radius: 8px;
+    background-color: $ui-01;
+    border: 1px solid $ui-03;
+    border-radius: 8px;
+
+    .action-buttons {
+      padding: 16px 32px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  .form-question-container {
+    width: 100%;
+    padding: 16px 32px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    box-sizing: border-box;
+    border-bottom: 1px solid $ui-03;
+
+    .form-question-preview {
+      color: $ui-07;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-question-wrapper {
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+
+      .answers-wrapper {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+        column-gap: 16px;
+        row-gap: 8px;
+
+        .input-wrapper {
+          width: 500px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import "../../../../../../../../core/style/colors.scss";
+
+.new-project-container {
+  .navbar-container {
+    .left-wrapper {
+      padding: 0 16px;
+    }
+
+    .right-wrapper {
+      padding: 0 16px;
+    }
+
+    .app-selector-wrapper {
+      border-right: 1px solid $ui-09;
+    }
+
+    .search-box-container {
+      margin: 0 16px;
+    }
+  }
+}

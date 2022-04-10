@@ -9,17 +9,31 @@ import { authUser } from "./actions/authActions";
 //REDUCERS
 import { authReducer } from "./reducers/authReducers";
 import { pusherReducer } from "./reducers/pusherReducers";
+import { modalManagerReducer } from "./reducers/modalManagerReducers";
+import { newProjectFormReducer } from "../../app/screens/Dashboard/modalManager/modals/NewProject/redux/reducers/formManagerReducers";
+
+const modalManagerReducers = combineReducers({
+  state: modalManagerReducer,
+  newProjectForm: newProjectFormReducer,
+});
+
+const appReducers = combineReducers({
+  pusher: pusherReducer,
+  modalManager: modalManagerReducers,
+});
 
 const coreReducers = combineReducers({
   account: authReducer,
-  pusher: pusherReducer,
+  app: appReducers,
 });
 
 const initialState = {
-  pusher: new Pusher(process.env.REACT_APP_PUSHER_KEY ?? "", {
-    cluster: "eu",
-    // encrypted: true,
-  }),
+  app: {
+    pusher: new Pusher(process.env.REACT_APP_PUSHER_KEY ?? "", {
+      cluster: "eu",
+      // encrypted: true,
+    }),
+  },
 };
 
 const middleware = [thunk];
