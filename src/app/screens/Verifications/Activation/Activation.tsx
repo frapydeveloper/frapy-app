@@ -18,7 +18,7 @@ function Activation({}: Props) {
   return (
     <Stack
       alignItem="center"
-      padding={[100]}
+      padding={[50]}
       styles={{ backgroundColor: "#fafafb" }}
       fullHeight
     >
@@ -26,7 +26,7 @@ function Activation({}: Props) {
         <Logo application="frapy" type="full" size={42} />
       </Stack>
 
-      <Card width={800}>
+      <Card width={360}>
         <>
           {success && (
             <Stack padding={[32, 32]}>
