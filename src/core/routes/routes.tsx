@@ -7,6 +7,7 @@ import Team from "../../app/screens/Dashboard/pages/Team";
 import Project from "../../app/screens/Project";
 import SignIn from "../../app/screens/SignIn";
 import ModalManager from "../../app/screens/Dashboard/modalManager";
+import ResetPassword from "../../app/screens/ResetPassword";
 
 export const routes = (isLoggedIn: boolean) => [
   {
@@ -65,7 +66,7 @@ export const routes = (isLoggedIn: boolean) => [
       { path: "", element: <Navigate to="/sign-in" /> },
       { path: "sign-in", element: <SignIn /> },
       { path: "sign-up", element: <div>Sign up</div> },
-      { path: "reset-password", element: <div>Reset password</div> },
+      { path: "reset-password", element: <ResetPassword /> },
       { path: "recovery", element: <div>Recover</div> },
       { path: "verification", element: <div>Verification</div> },
     ],
