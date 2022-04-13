@@ -19,13 +19,13 @@ function ResetPassword({}: Props) {
       alignItem="center"
       justifyContent="center"
       styles={{ backgroundColor: "#fafafb" }}
+      fullHeight
     >
       <Stack margin={[0, 0, 16, 0]} alignItem="center">
         <Logo application="frapy" type="full" size={42} />
       </Stack>
-
-      <Card padding={[24, 32]}>
-        <Stack>
+      <Card width={320}>
+        <Stack padding={[24, 32]}>
           <Stack margin={[16, 0]} alignItem="center">
             <Typography type="h5">Can't login?</Typography>
           </Stack>
@@ -34,7 +34,6 @@ function ResetPassword({}: Props) {
               We will send you a recovery link
             </Typography>
           </Stack>
-
           <Stack rowGap={16}>
             <Input
               type="text"
@@ -44,7 +43,6 @@ function ResetPassword({}: Props) {
             />
             <Button fullWidth>Send recovery link</Button>
           </Stack>
-
           <Stack margin={[8, 0, 0, 0]}>
             <Button kind="ghost">Return to login</Button>
           </Stack>
