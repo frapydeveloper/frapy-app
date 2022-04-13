@@ -13,7 +13,7 @@ function EmailChange({}: Props) {
   const processId: string = searchParams.get("processId") ?? "";
   const verificationToken: string = searchParams.get("verificationToken") ?? "";
 
-  const success: boolean = false;
+  const success: boolean = true;
 
   return (
     <Stack
