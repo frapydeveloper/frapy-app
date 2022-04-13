@@ -4,7 +4,8 @@
     "paths": {
       "@core/*": ["./src/core/*"],
       "@style": ["./src/core/style"],
-      "@config": ["./src/core/config"]
+      "@config": ["./src/core/config"],
+      "@screens": ["./src/app/screens"]
     }
   }
 }

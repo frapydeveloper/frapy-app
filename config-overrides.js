@@ -8,6 +8,7 @@ module.exports = function override(config) {
       "@core": path.resolve(__dirname, "src/core"),
       "@style": path.resolve(__dirname, "src/core/style"),
       "@config": path.resolve(__dirname, "src/core/config"),
+      "@screens": path.resolve(__dirname, "src/app/screens"),
     },
   };
 
