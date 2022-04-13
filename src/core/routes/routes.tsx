@@ -12,6 +12,7 @@ import Activation from "../../app/screens/Verifications/Activation";
 import EmailChange from "../../app/screens/Verifications/EmailChange";
 import Recovery from "../../app/screens/Verifications/Recovery";
 import Termination from "../../app/screens/Verifications/Termination";
+import SignUp from "../../app/screens/SignUp";
 
 export const routes = (isLoggedIn: boolean) => [
   {
@@ -69,7 +70,7 @@ export const routes = (isLoggedIn: boolean) => [
     children: [
       { path: "", element: <Navigate to="/sign-in" /> },
       { path: "sign-in", element: <SignIn /> },
-      { path: "sign-up", element: <div>Sign up</div> },
+      { path: "sign-up", element: <SignUp /> },
       { path: "reset-password", element: <ResetPassword /> },
       {
         path: "verification",
