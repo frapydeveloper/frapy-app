@@ -13,7 +13,7 @@ function Activation({}: Props) {
   const userId: string = searchParams.get("userId") ?? "";
   const activationToken: string = searchParams.get("activationToken") ?? "";
 
-  const success: boolean = true;
+  const success: boolean = false;
 
   return (
     <Stack
@@ -58,11 +58,17 @@ function Activation({}: Props) {
           )}
           {!success && (
             <Stack padding={[24, 32]}>
+              <Stack margin={[0, 0, 16, 0]} alignItem="center">
+                <img
+                  src="https://static.frapy.co/assets/illustration/missed-chances-animate.svg"
+                  height="350"
+                />
+              </Stack>
               <Stack margin={[16, 0]} alignItem="center">
                 <Typography type="h5">Account Verification</Typography>
               </Stack>
               <Stack rowGap={16} alignItem="center">
-                <Typography type="body4">
+                <Typography type="body4" textAlign="center">
                   Oops! Verification link may expired, or account already
                   verified.
                 </Typography>
