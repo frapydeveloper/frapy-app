@@ -1,7 +1,15 @@
 import "./reset-password.scss";
 
 import React from "react";
-import { Button, Card, Divider, Input, Logo, Typography } from "@frapy/ui-kit";
+import {
+  Button,
+  Card,
+  Divider,
+  Input,
+  Logo,
+  Stack,
+  Typography,
+} from "@frapy/ui-kit";
 
 type Props = {};
 
@@ -13,14 +21,16 @@ function ResetPassword({}: Props) {
       </div>
       <Card padding={[24, 32]}>
         <div className="reset-password-panel-wrapper">
-          <div className="panel-head">
+          <Stack margin={[16, 0]}>
             <Typography type="h5">Can't login?</Typography>
-          </div>
-          <Typography type="subhead3">
-            We will send you a recovery link
-          </Typography>
+          </Stack>
+          <Stack margin={[16, 0]}>
+            <Typography type="subhead3">
+              We will send you a recovery link
+            </Typography>
+          </Stack>
 
-          <div className="panel-body">
+          <Stack rowGap={16}>
             <Input
               type="text"
               placeholder="Enter your email"
@@ -28,7 +38,8 @@ function ResetPassword({}: Props) {
               fullWidth
             />
             <Button fullWidth>Send recovery link</Button>
-          </div>
+          </Stack>
+
           <div className="panel-footer">
             <Button kind="ghost">Return to login</Button>
           </div>
