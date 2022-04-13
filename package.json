@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@frapy/icons": "^0.0.20",
-    "@frapy/ui-kit": "^0.1.30",
+    "@frapy/ui-kit": "^0.1.31",
     "@frapy/utils": "^0.0.18",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
