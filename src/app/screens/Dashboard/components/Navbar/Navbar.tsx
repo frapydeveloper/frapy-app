@@ -6,13 +6,14 @@ import {
   Navbar as NavbarComponent,
   AppSelector,
   SearchBox,
+  Avatar,
 } from "@frapy/ui-kit";
 
 type Props = {};
 
 function Navbar({}: Props) {
   return (
-    <div className="navbar-container">
+    <div className="dashboard-navbar-container">
       <NavbarComponent
         leftItems={
           <>
@@ -20,6 +21,7 @@ function Navbar({}: Props) {
             <SearchBox placeholder="Search for project or team" />
           </>
         }
+        rightItems={<Avatar name="John Hall" size="md" />}
       />
     </div>
   );

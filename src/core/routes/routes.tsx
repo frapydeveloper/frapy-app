@@ -45,6 +45,11 @@ export const routes = (isLoggedIn: boolean) => [
         exact: true,
         element: <Project />,
       },
+      {
+        path: "profile",
+        exact: true,
+        element: <div>Profile page</div>,
+      },
     ],
   },
   {
@@ -57,8 +62,12 @@ export const routes = (isLoggedIn: boolean) => [
       <Navigate to="/" />
     ),
     children: [
-      { path: "sign-in", element: <SignIn /> },
       { path: "", element: <Navigate to="/sign-in" /> },
+      { path: "sign-in", element: <SignIn /> },
+      { path: "sign-up", element: <div>Sign up</div> },
+      { path: "reset-password", element: <div>Reset password</div> },
+      { path: "recovery", element: <div>Recover</div> },
+      { path: "verification", element: <div>Verification</div> },
     ],
   },
 ];

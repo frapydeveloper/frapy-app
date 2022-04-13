@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@frapy/icons": "^0.0.20",
-    "@frapy/ui-kit": "^0.1.12",
+    "@frapy/ui-kit": "^0.1.27",
+    "@frapy/utils": "^0.0.18",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -28,12 +29,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "env-cmd -e localhost react-scripts --max_old_space_size=4096 start",
-    "build-dev": "env-cmd -e development react-scripts --max_old_space_size=4096 build",
-    "build-staging": "env-cmd -e staging react-scripts --max_old_space_size=4096 build",
-    "build-production": "env-cmd -e production react-scripts --max_old_space_size=4096 build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "env-cmd -e localhost react-app-rewired --max_old_space_size=4096 start",
+    "build-dev": "env-cmd -e development react-app-rewired --max_old_space_size=4096 build",
+    "build-staging": "env-cmd -e staging react-app-rewired --max_old_space_size=4096 build",
+    "build-production": "env-cmd -e production react-app-rewired --max_old_space_size=4096 build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +46,9 @@
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-app-rewire-alias": "^1.1.7",
+    "react-app-rewired": "^2.2.1"
+  }
 }

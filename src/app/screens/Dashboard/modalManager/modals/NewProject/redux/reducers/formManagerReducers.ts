@@ -5,7 +5,6 @@ import {
 } from "../constants/formManagerConstants";
 
 const initialState = {
-  currentStep: 0,
   answers: {},
 };
 
@@ -16,10 +15,11 @@ export const newProjectFormReducer = (state = initialState, action: any) => {
         ...state,
         currentStep: action.step,
       };
+
     case SET_ANSWER:
       return {
         ...state,
-        answers: { [action.step]: action.answer },
+        answers: { ...state.answers, [action.key]: action.data },
       };
     case CLEAR_FORM:
       return {

@@ -1,3 +1,20 @@
-import { TECHNOLOGY_STACK } from "./config";
+import {
+  TECHNOLOGY_STACK,
+  ARCHITECTURE,
+  DATABASE,
+  DATABASE_ORM,
+  API_ARCHITECTURE,
+  FRAMEWORK,
+} from "./config";
 
-export default TECHNOLOGY_STACK;
+import type { TTechStack } from "./config";
+
+export {
+  TTechStack,
+  TECHNOLOGY_STACK,
+  ARCHITECTURE,
+  DATABASE,
+  DATABASE_ORM,
+  API_ARCHITECTURE,
+  FRAMEWORK,
+};
