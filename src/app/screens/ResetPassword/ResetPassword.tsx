@@ -15,16 +15,21 @@ type Props = {};
 
 function ResetPassword({}: Props) {
   return (
-    <div className="reset-password-container">
-      <div className="logo-wrapper">
+    <Stack
+      alignItem="center"
+      justifyContent="center"
+      styles={{ backgroundColor: "#fafafb" }}
+    >
+      <Stack margin={[0, 0, 16, 0]} alignItem="center">
         <Logo application="frapy" type="full" size={42} />
-      </div>
+      </Stack>
+
       <Card padding={[24, 32]}>
-        <div className="reset-password-panel-wrapper">
-          <Stack margin={[16, 0]}>
+        <Stack>
+          <Stack margin={[16, 0]} alignItem="center">
             <Typography type="h5">Can't login?</Typography>
           </Stack>
-          <Stack margin={[16, 0]}>
+          <Stack margin={[16, 0]} alignItem="center">
             <Typography type="subhead3">
               We will send you a recovery link
             </Typography>
@@ -40,20 +45,20 @@ function ResetPassword({}: Props) {
             <Button fullWidth>Send recovery link</Button>
           </Stack>
 
-          <div className="panel-footer">
+          <Stack margin={[8, 0, 0, 0]}>
             <Button kind="ghost">Return to login</Button>
-          </div>
-        </div>
+          </Stack>
+        </Stack>
       </Card>
-      <div className="sign-in-footer">
+      <Stack margin={[16, 0]} direction="row" justifyContent="center">
         <Button color="secondary" kind="ghost">
           Privacy policy
         </Button>
         <Button color="secondary" kind="ghost">
           Terms of use
         </Button>
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   );
 }
 
