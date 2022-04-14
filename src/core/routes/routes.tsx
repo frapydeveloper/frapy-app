@@ -8,6 +8,10 @@ import Project from "../../app/screens/Project";
 import SignIn from "../../app/screens/SignIn";
 import ModalManager from "../../app/screens/Dashboard/modalManager";
 import ResetPassword from "../../app/screens/ResetPassword";
+import Activation from "../../app/screens/Verifications/Activation";
+import EmailChange from "../../app/screens/Verifications/EmailChange";
+import Recovery from "../../app/screens/Verifications/Recovery";
+import Termination from "../../app/screens/Verifications/Termination";
 
 export const routes = (isLoggedIn: boolean) => [
   {
@@ -67,8 +71,32 @@ export const routes = (isLoggedIn: boolean) => [
       { path: "sign-in", element: <SignIn /> },
       { path: "sign-up", element: <div>Sign up</div> },
       { path: "reset-password", element: <ResetPassword /> },
-      { path: "recovery", element: <div>Recover</div> },
-      { path: "verification", element: <div>Verification</div> },
+      {
+        path: "verification",
+        element: <Outlet />,
+        children: [
+          {
+            path: "activation",
+            exact: true,
+            element: <Activation />,
+          },
+          {
+            path: "email-change",
+            exact: true,
+            element: <EmailChange />,
+          },
+          {
+            path: "recovery",
+            exact: true,
+            element: <Recovery />,
+          },
+          {
+            path: "termination",
+            exact: true,
+            element: <Termination />,
+          },
+        ],
+      },
     ],
   },
 ];
