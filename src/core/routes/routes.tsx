@@ -13,6 +13,8 @@ import EmailChange from "../../app/screens/Verifications/EmailChange";
 import Recovery from "../../app/screens/Verifications/Recovery";
 import Termination from "../../app/screens/Verifications/Termination";
 import SignUp from "../../app/screens/SignUp";
+import Navbar from "../../app/screens/Dashboard/components/Navbar";
+import Profile from "../../app/screens/Profile";
 
 export const routes = (isLoggedIn: boolean) => [
   {
@@ -30,19 +32,36 @@ export const routes = (isLoggedIn: boolean) => [
         element: (
           <>
             <ModalManager />
-            <Dashboard />
+            <Navbar />
+            <Outlet />
           </>
         ),
         children: [
           {
             path: "",
-            exact: true,
-            element: <Home />,
+            element: <Dashboard />,
+            children: [
+              {
+                path: "/",
+                exact: true,
+                element: <Home />,
+              },
+              {
+                path: "team/:team",
+                exact: true,
+                element: <Team />,
+              },
+            ],
           },
           {
-            path: "team/:team",
+            path: "profile",
             exact: true,
-            element: <Team />,
+            element: <Profile />,
+          },
+          {
+            path: "bills-and-invoices",
+            exact: true,
+            element: <div>Invoice and invoices</div>,
           },
         ],
       },
@@ -50,11 +69,6 @@ export const routes = (isLoggedIn: boolean) => [
         path: "team/:team/file/:file",
         exact: true,
         element: <Project />,
-      },
-      {
-        path: "profile",
-        exact: true,
-        element: <div>Profile page</div>,
       },
     ],
   },

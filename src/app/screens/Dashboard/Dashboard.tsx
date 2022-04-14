@@ -10,7 +10,6 @@ type Props = {};
 function Dashboard({}: Props) {
   return (
     <div className="dashboard-container">
-      <Navbar />
       <div className="app-container">
         <Sidebar />
         <Outlet />
