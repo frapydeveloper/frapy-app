@@ -34,7 +34,6 @@ function Navbar({}: Props) {
             <OverflowMenuItem onClick={() => navigate("profile")}>
               Profile
             </OverflowMenuItem>
-            <OverflowMenuItem>Bills & Invoices</OverflowMenuItem>
             <OverflowMenuItem>Logout</OverflowMenuItem>
           </OverflowMenu>
         }
