@@ -3,6 +3,7 @@ import React from "react";
 import {
   Button,
   Card,
+  Checkbox,
   Divider,
   Input,
   Logo,
@@ -40,10 +41,17 @@ function SignUp({}: Props) {
                 <Input type="text" labelText="Username" fullWidth />
                 <Input type="text" labelText="Password" fullWidth />
                 <Input type="text" labelText="Confirm password" fullWidth />
-                <span>
-                  <input type="checkbox" />
-                  <label>Accept</label>
-                </span>
+                <Stack rowGap={16} margin={[16, 0]} alignItem="flex-start">
+                  <Checkbox labelText="Yes! Send me news and offers from Frapy about products, events, and more." />
+                  <Typography type="body4">
+                    <>
+                      By signing up, I accept the Frapy{" "}
+                      <a href="https://google.com">Terms of Service</a> and
+                      acknowledge the{" "}
+                      <a href="https://google.com">Privacy Policy</a>.
+                    </>
+                  </Typography>
+                </Stack>
                 <Button fullWidth>Create Account</Button>
                 <Typography type="subhead4">OR</Typography>
                 <Button
