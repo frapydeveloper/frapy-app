@@ -11,9 +11,11 @@ import "./core/style/main.scss";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <ThemeContext.Provider value={myObject}>
+        <Router>
+          <App />
+        </Router>
+      </ThemeContext.Provider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
