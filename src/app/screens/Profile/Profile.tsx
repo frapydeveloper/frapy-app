@@ -11,10 +11,12 @@ import {
   Stack,
   Typography,
 } from "@frapy/ui-kit";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
 function Profile({}: Props) {
+  const navigate = useNavigate();
   return (
     <Stack
       padding={[50]}
@@ -25,7 +27,12 @@ function Profile({}: Props) {
       fullHeight
     >
       <Card width={800}>
-        <Stack rowGap={16} padding={[32]}>
+        <Stack rowGap={16} padding={[32, 16, 16, 16]}>
+          <Button kind="link" onClick={() => navigate("/")}>
+            Back to Home
+          </Button>
+        </Stack>
+        <Stack rowGap={16} padding={[0, 32]}>
           <Typography type="h5">Profile Settings</Typography>
           <Stack direction="row" columnGap={32} alignItem="center">
             <OverflowMenu
