@@ -1,23 +1,12 @@
-import "./reset-password.scss";
-
 import React from "react";
 
-import {
-  Button,
-  Card,
-  Divider,
-  Input,
-  Logo,
-  Stack,
-  Typography,
-} from "@frapy/ui-kit";
-import { useNavigate } from "react-router-dom";
+import { Stack } from "@frapy/ui-kit";
+import { motion, AnimatePresence } from "framer-motion";
+import ResetPasswordForm from "./components/resetPasswordForm";
 
 type Props = {};
 
 function ResetPassword({}: Props) {
-  const navigate = useNavigate();
-
   return (
     <Stack
       alignItem="center"
@@ -25,46 +14,16 @@ function ResetPassword({}: Props) {
       styles={{ backgroundColor: "#fafafb" }}
       fullHeight
     >
-      <Stack margin={[0, 0, 16, 0]} alignItem="center">
-        <Logo application="frapy" type="full" size={42} />
-      </Stack>
-      <Card width={360}>
-        <Stack padding={[24, 32]}>
-          <Stack margin={[16, 0]} alignItem="center">
-            <Typography type="h5">Can't login?</Typography>
-          </Stack>
-          <Stack margin={[16, 0]} alignItem="center">
-            <Typography type="subhead3">
-              We will send you a recovery link
-            </Typography>
-          </Stack>
-          <Stack rowGap={16} alignItem="center">
-            <Input
-              type="text"
-              placeholder="Enter your email"
-              hideLabel
-              fullWidth
-            />
-            <Button fullWidth>Send recovery link</Button>
-          </Stack>
-          <Stack margin={[16, 0]}>
-            <Divider />
-          </Stack>
-          <Stack margin={[8, 0, 0, 0]} alignItem="center">
-            <Button kind="link" onClick={() => navigate("/sign-in")}>
-              Return to login
-            </Button>
-          </Stack>
-        </Stack>
-      </Card>
-      <Stack margin={[16, 0]} direction="row" justifyContent="center">
-        <Button color="secondary" kind="ghost">
-          Privacy policy
-        </Button>
-        <Button color="secondary" kind="ghost">
-          Terms of use
-        </Button>
-      </Stack>
+      <AnimatePresence exitBeforeEnter>
+        <motion.div
+          key="sign-in-form"
+          initial={{ opacity: 0, scale: 0.75 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.75 }}
+        >
+          <ResetPasswordForm />
+        </motion.div>
+      </AnimatePresence>
     </Stack>
   );
 }

@@ -1,22 +1,23 @@
-import "./sign-in.scss";
+import React, { useEffect, useState } from "react";
 
-import React from "react";
+import { Stack } from "@frapy/ui-kit";
 
-import {
-  Button,
-  Card,
-  Divider,
-  Input,
-  Logo,
-  Stack,
-  Typography,
-} from "@frapy/ui-kit";
-import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import SignInForm from "./components/SignInForm";
+import TwoFactorForm from "./components/TwoFactorForm";
+import { useDispatch, useSelector } from "react-redux";
+import { setScreen } from "@core/redux/actions/screenManagerActions";
 
 type Props = {};
 
 function SignIn({}: Props) {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const screenManager = useSelector((state: any) => state.screenManager);
+
+  useEffect(() => {
+    dispatch(setScreen("sign-in"));
+  }, []);
 
   return (
     <Stack
@@ -25,51 +26,28 @@ function SignIn({}: Props) {
       styles={{ backgroundColor: "#fafafb" }}
       fullHeight
     >
-      <Stack margin={[0, 0, 16, 0]} alignItem="center">
-        <Logo application="frapy" type="full" size={42} />
-      </Stack>
-      <Card width={360}>
-        <Stack padding={[24, 32]}>
-          <Stack margin={[16, 0]} alignItem="center">
-            <Typography type="h5">Sign in to your account</Typography>
-          </Stack>
-          <Stack rowGap={16} alignItem="center">
-            <Input type="text" placeholder="Your email" hideLabel fullWidth />
-            <Button fullWidth>Continue</Button>
-            <Typography type="subhead4">OR</Typography>
-            <Button
-              color="secondary"
-              kind="tertiary"
-              renderIcon={
-                <img
-                  src="https://static.frapy.co/assets/social-media/google-logo.svg"
-                  height={16}
-                />
-              }
-              fullWidth
-            >
-              Continue with Google
-            </Button>
-          </Stack>
-          <Stack margin={[16, 0]}>
-            <Divider />
-          </Stack>
-          <Stack margin={[8, 0, 0, 0]} direction="row" justifyContent="center">
-            <Button kind="link" onClick={() => navigate("/reset-password")}>
-              Can't login?
-            </Button>
-            <Button kind="link">Sign up for new user?</Button>
-          </Stack>
-        </Stack>
-      </Card>
-      <Stack margin={[16, 0]} direction="row" justifyContent="center">
-        <Button color="secondary" kind="ghost">
-          Privacy policy
-        </Button>
-        <Button color="secondary" kind="ghost">
-          Terms of use
-        </Button>
-      </Stack>
+      <AnimatePresence exitBeforeEnter>
+        {screenManager.activeScreen === "sign-in" && (
+          <motion.div
+            key="sign-in-form"
+            initial={{ opacity: 0, scale: 0.75 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.75 }}
+          >
+            <SignInForm />
+          </motion.div>
+        )}
+        {screenManager.activeScreen === "sign-in-2fa" && (
+          <motion.div
+            key="two-factor-auth-form"
+            initial={{ opacity: 0, scale: 0.75 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.75 }}
+          >
+            <TwoFactorForm />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Stack>
   );
 }

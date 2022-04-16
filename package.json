@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@frapy/api-client": "^0.1.28",
+    "@frapy/api-client": "^0.1.29",
     "@frapy/icons": "^0.0.20",
     "@frapy/ui-kit": "^0.2.5",
     "@frapy/utils": "^0.0.18",
@@ -16,6 +16,7 @@
     "@types/react-dom": "^17.0.14",
     "dotenv": "^16.0.0",
     "env-cmd": "^10.1.0",
+    "framer-motion": "^6.3.0",
     "pusher-js": "^7.0.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",

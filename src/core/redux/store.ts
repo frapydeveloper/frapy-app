@@ -2,7 +2,6 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import Pusher from "pusher-js";
-import { FrapyClient } from "@frapy/api-client";
 
 //ACTIONS
 import { authUser } from "./actions/authActions";
@@ -12,11 +11,16 @@ import { authReducer } from "./reducers/authReducers";
 import { pusherReducer } from "./reducers/pusherReducers";
 import { modalManagerReducer } from "./reducers/modalManagerReducers";
 import { newProjectFormReducer } from "../../app/screens/Dashboard/modalManager/modals/NewProject/redux/reducers/formManagerReducers";
-import { frapyClientReducer } from "./reducers/frapyClientReducers";
+import { screenManagerReducer } from "./reducers/screenManagerReducers";
+import { signInReducer } from "../../app/screens/SignIn/redux/reducers/signInReducers";
 
 const modalManagerReducers = combineReducers({
   state: modalManagerReducer,
   newProjectForm: newProjectFormReducer,
+});
+
+const screenDataReducers = combineReducers({
+  signIn: signInReducer,
 });
 
 const appReducers = combineReducers({
@@ -26,15 +30,15 @@ const appReducers = combineReducers({
 const coreReducers = combineReducers({
   account: authReducer,
   app: appReducers,
-  pusherClient: pusherReducer,
-  // frapyClient: frapyClientReducer,
+  pusher: pusherReducer,
+  screenManager: screenManagerReducer,
+  screenData: screenDataReducers,
 });
 
 const initialState = {
-  pusherClient: new Pusher(process.env.REACT_APP_PUSHER_KEY ?? "", {
+  pusher: new Pusher(process.env.REACT_APP_PUSHER_KEY ?? "", {
     cluster: "eu",
   }),
-  // frapyClient: new FrapyClient(process.env.REACT_APP_API ?? ""),
 };
 
 const middleware = [thunk];
