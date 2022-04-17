@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@frapy/api-client": "^0.1.29",
+    "@frapy/api-client": "^0.2.6",
     "@frapy/icons": "^0.0.20",
-    "@frapy/ui-kit": "^0.2.5",
+    "@frapy/ui-kit": "^0.2.7",
     "@frapy/utils": "^0.0.18",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",

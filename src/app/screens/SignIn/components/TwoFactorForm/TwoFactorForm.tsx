@@ -15,7 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setScreen } from "@core/redux/actions/screenManagerActions";
 import { frapyClient } from "@core/api";
 import { useNavigate } from "react-router-dom";
-import { clearCredentials } from "../../redux/actions/signInActions";
+import {
+  clearCredentials,
+  setPassword,
+} from "../../redux/actions/signInActions";
 
 type Props = {};
 
@@ -26,11 +29,11 @@ function TwoFactorForm({}: Props) {
 
   const signInData = useSelector((state: any) => state.screenData.signIn);
 
-  const [errorMessage, setErrorMessage] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const signInVia2FA = async ({ otpCode }: { otpCode: string }) => {
+  const signInVia2FARequest = async ({ otpCode }: { otpCode: string }) => {
     try {
-      const result = await frapyClient.auth.signIn({
+      const result = await frapyClient.auths.signIn({
         dto: {
           credentials: {
             email: signInData.email,
@@ -40,8 +43,8 @@ function TwoFactorForm({}: Props) {
         },
       });
       if (result.status === 200) {
-        navigate("/");
         dispatch(clearCredentials());
+        window.location.reload();
       }
     } catch (error: any) {
       switch (error.response.data.error.code) {
@@ -80,8 +83,9 @@ function TwoFactorForm({}: Props) {
             <PinInput
               digits={6}
               onFilled={({ pin }: { pin: string }) =>
-                signInVia2FA({ otpCode: pin })
+                signInVia2FARequest({ otpCode: pin })
               }
+              error={errorMessage !== ""}
             />
             <>
               {errorMessage && (
@@ -91,7 +95,14 @@ function TwoFactorForm({}: Props) {
                   animate={{ opacity: 1, width: "100%" }}
                   exit={{ opacity: 0 }}
                 >
-                  <Typography type="menu2">{errorMessage}</Typography>
+                  <Typography
+                    type="menu2"
+                    textAlign="center"
+                    variant="danger"
+                    colorStyle="solid"
+                  >
+                    {errorMessage}
+                  </Typography>
                 </motion.div>
               )}
             </>
@@ -100,7 +111,13 @@ function TwoFactorForm({}: Props) {
             <Divider />
           </Stack>
           <Stack margin={[8, 0, 0, 0]} direction="row" justifyContent="center">
-            <Button kind="link" onClick={() => dispatch(setScreen("sign-in"))}>
+            <Button
+              kind="link"
+              onClick={() => {
+                dispatch(setScreen("sign-in"));
+                dispatch(setPassword(""));
+              }}
+            >
               Back to sign in
             </Button>
           </Stack>

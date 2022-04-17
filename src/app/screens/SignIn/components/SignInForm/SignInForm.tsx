@@ -13,7 +13,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setScreen } from "@core/redux/actions/screenManagerActions";
 import { frapyClient } from "@core/api";
-import { setEmail, setPassword } from "../../redux/actions/signInActions";
+import {
+  clearCredentials,
+  setEmail,
+  setPassword,
+} from "../../redux/actions/signInActions";
 import { useNavigate } from "react-router-dom";
 
 type Props = {};
@@ -27,11 +31,44 @@ function SignInForm({}: Props) {
 
   const [step, setStep] = useState<number>(0);
 
-  const [errorMessage, setErrorMessage] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const signInViaEmail = async () => {
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+
+  const validateEmail = (email: string) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log(re.test(email));
+    return re.test(email);
+  };
+
+  const nextStep = () => {
+    if (validateEmail(signInData?.email)) {
+      setEmailError(false);
+      setStep(1);
+    } else {
+      setEmailError(true);
+    }
+  };
+
+  const signIn = () => {
+    if (validateEmail(signInData?.email)) {
+      setEmailError(false);
+      if (signInData?.password?.length > 1) {
+        setPasswordError(false);
+        signInViaEmailRequest();
+      } else {
+        setPasswordError(true);
+      }
+    } else {
+      setEmailError(true);
+    }
+  };
+
+  const signInViaEmailRequest = async () => {
     try {
-      const result = await frapyClient.auth.signIn({
+      const result = await frapyClient.auths.signIn({
         dto: {
           credentials: {
             email: signInData.email,
@@ -40,7 +77,8 @@ function SignInForm({}: Props) {
         },
       });
       if (result.status === 200) {
-        navigate("/");
+        dispatch(clearCredentials());
+        window.location.reload();
       }
     } catch (error: any) {
       switch (error.response.data.error.code) {
@@ -73,10 +111,14 @@ function SignInForm({}: Props) {
           </Stack>
           <Stack rowGap={16} alignItem="center">
             <Input
-              type="text"
+              type="email"
               hideLabel
               placeholder="Your email"
               onChange={(data: string) => dispatch(setEmail(data))}
+              showHint={emailError}
+              hint="Email is not accepted or empty"
+              error={emailError || errorMessage !== ""}
+              defaultValue={signInData.email}
               fullWidth
             />
             <AnimatePresence exitBeforeEnter>
@@ -91,7 +133,7 @@ function SignInForm({}: Props) {
                   }}
                 >
                   {/* <Stack rowGap={16}> */}
-                  <Button fullWidth onClick={() => setStep(1)}>
+                  <Button fullWidth onClick={() => nextStep()}>
                     Continue
                   </Button>
                   {/* </Stack> */}
@@ -109,10 +151,13 @@ function SignInForm({}: Props) {
                 >
                   <Stack rowGap={16} alignItem="center">
                     <Input
-                      type="text"
+                      type="password"
                       hideLabel
                       placeholder="Your password"
                       onChange={(data: string) => dispatch(setPassword(data))}
+                      showHint={passwordError}
+                      hint="Password is not accepted or empty"
+                      error={passwordError || errorMessage !== ""}
                       fullWidth
                     />
                     <>
@@ -123,20 +168,25 @@ function SignInForm({}: Props) {
                           animate={{ opacity: 1, width: "100%" }}
                           exit={{ opacity: 0 }}
                         >
-                          <Typography type="menu2" textAlign="center">
+                          <Typography
+                            type="menu2"
+                            textAlign="center"
+                            variant="danger"
+                            colorStyle="solid"
+                          >
                             {errorMessage}
                           </Typography>
                         </motion.div>
                       )}
                     </>
-                    <Button onClick={() => signInViaEmail()} fullWidth>
+                    <Button onClick={() => signIn()} fullWidth>
                       Sign In
                     </Button>
                   </Stack>
                 </motion.div>
               )}
             </AnimatePresence>
-            <Typography type="subhead4">OR</Typography>
+            {/* <Typography type="subhead4">OR</Typography>
             <Button
               color="secondary"
               kind="tertiary"
@@ -149,7 +199,7 @@ function SignInForm({}: Props) {
               fullWidth
             >
               Continue with Google
-            </Button>
+            </Button> */}
           </Stack>
           <Stack margin={[16, 0]}>
             <Divider />

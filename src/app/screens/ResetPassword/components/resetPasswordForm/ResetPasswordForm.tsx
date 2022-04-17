@@ -33,7 +33,7 @@ function ResetPasswordForm({}: Props) {
           </Stack>
           <Stack rowGap={16} alignItem="center">
             <Input
-              type="text"
+              type="email"
               placeholder="Enter your email"
               hideLabel
               fullWidth

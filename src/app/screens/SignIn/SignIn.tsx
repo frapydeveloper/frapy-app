@@ -29,7 +29,7 @@ function SignIn({}: Props) {
       <AnimatePresence exitBeforeEnter>
         {screenManager.activeScreen === "sign-in" && (
           <motion.div
-            key="sign-in-form"
+            key="sign-in"
             initial={{ opacity: 0, scale: 0.75 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.75 }}
@@ -39,7 +39,7 @@ function SignIn({}: Props) {
         )}
         {screenManager.activeScreen === "sign-in-2fa" && (
           <motion.div
-            key="two-factor-auth-form"
+            key="sign-in-2fa"
             initial={{ opacity: 0, scale: 0.75 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.75 }}

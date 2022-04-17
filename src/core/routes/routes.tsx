@@ -15,12 +15,16 @@ import Termination from "../../app/screens/Verifications/Termination";
 import SignUp from "../../app/screens/SignUp";
 import Navbar from "../../app/screens/Dashboard/components/Navbar";
 import Profile from "../../app/screens/Profile";
+import LoadingScreen from "../../app/components/LoadingScreen";
+import Tutorials from "../../app/components/Tutorials";
 
 export const routes = (isLoggedIn: boolean) => [
   {
     path: "/",
     element: isLoggedIn ? (
       <>
+        <Tutorials />
+        <LoadingScreen />
         <Outlet />
       </>
     ) : (

@@ -12,11 +12,15 @@ import {
   Typography,
 } from "@frapy/ui-kit";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 type Props = {};
 
 function Profile({}: Props) {
   const navigate = useNavigate();
+
+  const account = useSelector((state: any) => state.account);
+
   return (
     <Stack
       padding={[50]}
@@ -36,7 +40,14 @@ function Profile({}: Props) {
           <Typography type="h5">Profile Settings</Typography>
           <Stack direction="row" columnGap={32} alignItem="center">
             <OverflowMenu
-              invokeItem={<Avatar name="John Hall" size="xlg" />}
+              invokeItem={
+                <Avatar
+                  name={
+                    (account?.firstName ?? "") + " " + (account?.lastName ?? "")
+                  }
+                  size="xlg"
+                />
+              }
               light
             >
               <OverflowMenuItem>Upload</OverflowMenuItem>
@@ -45,8 +56,20 @@ function Profile({}: Props) {
             <Stack rowGap={8}>
               <Typography type="menu1">Name</Typography>
               <Stack fullWidth direction="row" columnGap={16}>
-                <Input type="text" labelText="Firstname" fullWidth />
-                <Input type="text" labelText="Lastname" fullWidth />
+                <Input
+                  key="firstname-input"
+                  type="text"
+                  labelText="Firstname"
+                  defaultValue={account?.firstName ?? ""}
+                  fullWidth
+                />
+                <Input
+                  key="lastname-input"
+                  type="text"
+                  labelText="Lastname"
+                  defaultValue={account?.lastName ?? ""}
+                  fullWidth
+                />
               </Stack>
             </Stack>
           </Stack>
@@ -67,7 +90,7 @@ function Profile({}: Props) {
             </Stack>
             <Stack fullWidth direction="row" columnGap={16}>
               <Input type="text" labelText="New email" fullWidth />
-              <Input type="text" labelText="Confirm Password" fullWidth />
+              <Input type="password" labelText="Confirm Password" fullWidth />
             </Stack>
             <Stack alignItem="flex-end" fullWidth>
               <Button>Submit</Button>
@@ -78,8 +101,8 @@ function Profile({}: Props) {
             <Typography type="menu1">Password</Typography>
             <Stack fullWidth direction="row" columnGap={16}>
               <Input type="text" labelText="Current Password" fullWidth />
-              <Input type="text" labelText="New Password" fullWidth />
-              <Input type="text" labelText="Confirm Password" fullWidth />
+              <Input type="password" labelText="New Password" fullWidth />
+              <Input type="password" labelText="Confirm Password" fullWidth />
             </Stack>
             <Stack alignItem="flex-end" fullWidth>
               <Button>Save Password</Button>
@@ -94,10 +117,10 @@ function Profile({}: Props) {
                   Current Plan: <b>Free</b>
                 </>
               </Typography>
-              <Typography type="body4">
+              {/* <Typography type="body4">
                 Upgrade plan for unlimited project files in teams.
               </Typography>
-              <Button kind="tertiary">Upgrade</Button>
+              <Button kind="tertiary">Upgrade</Button> */}
             </Stack>
           </Stack>
           <Divider />

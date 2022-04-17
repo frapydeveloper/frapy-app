@@ -1,19 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Button, Card, Divider, Logo, Stack, Typography } from "@frapy/ui-kit";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { frapyClient } from "@core/api";
+import { motion, AnimatePresence } from "framer-motion";
+import { Stack } from "@frapy/ui-kit";
+import { useSearchParams } from "react-router-dom";
+import ActivationFailed from "./components/ActivationFailed";
+import ActivationSuccess from "./components/ActivationSuccess";
 
 type Props = {};
 
 function Activation({}: Props) {
-  const navigate = useNavigate();
-
   const [searchParams] = useSearchParams();
 
-  const userId: string = searchParams.get("userId") ?? "";
-  const activationToken: string = searchParams.get("activationToken") ?? "";
+  const processId: string = searchParams.get("processId") ?? "";
+  const verificationToken: string = searchParams.get("verificationToken") ?? "";
 
-  const success: boolean = false;
+  const [success, setSuccess] = useState<boolean>(false);
+
+  useEffect(() => {
+    verifyRegistrationRequest();
+  }, []);
+
+  const verifyRegistrationRequest = async () => {
+    try {
+      const result = await frapyClient.registration.verify({
+        id: processId,
+        dto: {
+          verificationToken: verificationToken,
+        },
+      });
+      if (result.status === 201) {
+        setSuccess(true);
+      }
+    } catch (error: any) {
+      setSuccess(false);
+    }
+  };
 
   return (
     <Stack
@@ -22,66 +44,27 @@ function Activation({}: Props) {
       styles={{ backgroundColor: "#fafafb" }}
       fullHeight
     >
-      <Stack margin={[32, 0]} alignItem="center">
-        <Logo application="frapy" type="full" size={42} />
-      </Stack>
-
-      <Card width={360}>
-        <>
-          {success && (
-            <Stack padding={[32, 32]}>
-              <Stack margin={[0, 0, 16, 0]} alignItem="center">
-                <img
-                  src="https://static.frapy.co/assets/illustration/verified-animate.svg"
-                  height="350"
-                />
-              </Stack>
-              <Stack margin={[16, 0]} alignItem="center">
-                <Typography type="h5">Account Verification</Typography>
-              </Stack>
-
-              <Stack rowGap={16} alignItem="center">
-                <Typography type="body4" textAlign="center">
-                  Yaayy! Thanks for registering an account with Frapy. You are
-                  the coolest person in all the world!
-                </Typography>
-                <Typography type="body4" textAlign="center">
-                  Your account verification was successful! Let's get started!
-                </Typography>
-              </Stack>
-              <Stack margin={[24, 0]} alignItem="center">
-                <Button kind="normal" onClick={() => navigate("/")}>
-                  Return to sign in
-                </Button>
-              </Stack>
-            </Stack>
-          )}
-          {!success && (
-            <Stack padding={[24, 32]}>
-              <Stack margin={[0, 0, 16, 0]} alignItem="center">
-                <img
-                  src="https://static.frapy.co/assets/illustration/missed-chances-animate.svg"
-                  height="350"
-                />
-              </Stack>
-              <Stack margin={[16, 0]} alignItem="center">
-                <Typography type="h5">Account Verification</Typography>
-              </Stack>
-              <Stack rowGap={16} alignItem="center">
-                <Typography type="body4" textAlign="center">
-                  Oops! Verification link may expired, or account already
-                  verified.
-                </Typography>
-              </Stack>
-              <Stack margin={[24, 0]} alignItem="center">
-                <Button kind="link" onClick={() => navigate("/")}>
-                  Return to sign in
-                </Button>
-              </Stack>
-            </Stack>
-          )}
-        </>
-      </Card>
+      <AnimatePresence exitBeforeEnter>
+        {success ? (
+          <motion.div
+            key="sign-up-form"
+            initial={{ opacity: 0, scale: 0.75 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.75 }}
+          >
+            <ActivationSuccess />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="sign-up-completed"
+            initial={{ opacity: 0, scale: 0.75 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.75 }}
+          >
+            <ActivationFailed />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Stack>
   );
 }

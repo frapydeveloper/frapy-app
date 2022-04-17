@@ -13,6 +13,8 @@ import { modalManagerReducer } from "./reducers/modalManagerReducers";
 import { newProjectFormReducer } from "../../app/screens/Dashboard/modalManager/modals/NewProject/redux/reducers/formManagerReducers";
 import { screenManagerReducer } from "./reducers/screenManagerReducers";
 import { signInReducer } from "../../app/screens/SignIn/redux/reducers/signInReducers";
+import { tutorialReducer } from "../../app/components/Tutorials/redux/reducers/tutorialReducers";
+import { loadingManagerReducer } from "./reducers/loadingManagerReducers";
 
 const modalManagerReducers = combineReducers({
   state: modalManagerReducer,
@@ -25,6 +27,7 @@ const screenDataReducers = combineReducers({
 
 const appReducers = combineReducers({
   modalManager: modalManagerReducers,
+  tutorialManager: tutorialReducer,
 });
 
 const coreReducers = combineReducers({
@@ -33,6 +36,7 @@ const coreReducers = combineReducers({
   pusher: pusherReducer,
   screenManager: screenManagerReducer,
   screenData: screenDataReducers,
+  loadingManager: loadingManagerReducer,
 });
 
 const initialState = {

@@ -41,8 +41,8 @@ function Recovery({}: Props) {
               </Stack>
 
               <Stack rowGap={16} alignItem="center">
-                <Input type="text" labelText="New password" fullWidth />
-                <Input type="text" labelText="Confirm password" fullWidth />
+                <Input type="password" labelText="New password" fullWidth />
+                <Input type="password" labelText="Confirm password" fullWidth />
               </Stack>
               <Stack margin={[32, 0, 16, 0]} rowGap={16} alignItem="center">
                 <Button kind="normal">Reset Password</Button>

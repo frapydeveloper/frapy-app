@@ -6,11 +6,10 @@ import {
   Navbar as NavbarComponent,
   AppSelector,
   SearchBox,
-  Avatar,
-  OverflowMenu,
-  OverflowMenuItem,
+  Logo,
 } from "@frapy/ui-kit";
 import { useNavigate } from "react-router-dom";
+import Account from "./components/Account";
 
 type Props = {};
 
@@ -22,21 +21,13 @@ function Navbar({}: Props) {
       <NavbarComponent
         leftItems={
           <>
-            <AppSelector />
+            <div className="app-logo-wrapper" onClick={() => navigate("/")}>
+              <Logo application="frapy" type="full" variant="light" />
+            </div>
             <SearchBox placeholder="Search for project or team" />
           </>
         }
-        rightItems={
-          <OverflowMenu
-            invokeItem={<Avatar name="John Hall" size="md" />}
-            flipped
-          >
-            <OverflowMenuItem onClick={() => navigate("profile")}>
-              Profile
-            </OverflowMenuItem>
-            <OverflowMenuItem>Logout</OverflowMenuItem>
-          </OverflowMenu>
-        }
+        rightItems={<Account />}
       />
     </div>
   );
